@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat Web</title>
+<style>
+body {
+font-family: sans-serif;
+background-color: #444;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+margin: 0;
+}
+
+.chat-container {
+background-color: #333; 
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+padding: 20px;
+margin: 50px;
+width: 400px;
+display: flex;
+flex-direction: column;
+}
+
+h2 {
+color: #000; 
+text-align: center;
+margin-bottom: 15px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+color: #000;
+font-size: 0.9em;
+}
+
+input[type="text"] {
+width: calc(100% - 1px);
+padding: 8px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-sizing: border-box;
+font-size: 0.9em;
+}
+
+button {
+background-color: #000; 
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 1em;
+transition: background-color 0.3s ease;
+}
+
+button:hover {
+background-color: #444; 
+}
+
+.message-area {
+flex-grow: 1;
+border: 1px solid #ccc;
+border-radius: 4px;
+margin-top: 10px;
+padding: 10px;
+background-color: #f9f9f9;
+overflow-y: auto;
+font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+<h2>Chat Web</h2>
+<label for="user1">User 1</label>
+<input type="text" id="user1" value="User 1" readonly>
+<label for="message1">Message</label>
+<input type="text" id="message1" placeholder="Enter your message">
+<button onclick="sendMessage('user1')">Send</button>
+<div class="message-area" id="chat-log-user2"></div>
+</div>
+
+<div class="chat-container">
+<h2>Chat Web</h2>
+<label for="user2">User 2</label>
+<input type="text" id="user2" value="User 2" readonly>
+<label for="message1">Message</label>
+<input type="text" id="message2" placeholder="Enter your message">
+<button onclick="sendMessage('user2')">Send</button>
+<div class="message-area" id="chat-log-user1"></div>
+</div>
+
+<script>
+function sendMessage(userId) {
+const messageInputId = `message${userId.slice(-1)}`;
+const chatLogId = `chat-log-${userId}`;
+const messageInput = document.getElementById(messageInputId);
+const chatLog = document.getElementById(chatLogId);
+const message = messageInput.value.trim();
+
+if (message !== "") {
+const newMessage = document.createElement('p');
+newMessage.textContent = `${document.getElementById(userId).value}: ${message}`;
+chatLog.appendChild(newMessage);
+messageInput.value = ""; 
+chatLog.scrollTop = chatLog.scrollHeight; 
+}
+}
+</script>
+
+</body>
+</html>
